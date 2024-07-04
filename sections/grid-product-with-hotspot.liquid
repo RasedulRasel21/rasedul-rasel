@@ -78,6 +78,59 @@
   .popup-product-variants{
     padding: 14px;
   }
+
+  .ATC_button a{
+      display: flex;
+      width: auto;
+      height: 44px;
+      align-items: center;
+      font-size: 16px;
+      text-decoration: none;
+      background: #000;
+      color: #fff;
+      text-align: center;
+      position: relative;
+      transition: all .35s;
+      padding: 0 24px;
+  }
+  .ATC_button a span{
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      height: 100%;
+  }
+  .ATC_button a:after{
+      position: absolute;
+      content: "";
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: #FFF544;
+      color: #000;
+      transition: all .35s;
+  }
+  .ATC_button a:hover{
+      color: #000;
+  }
+  .ATC_button a:hover:after{
+      width: 100%;
+  }
+  .btn_arrow{
+      width: 24px;
+      animation: auto;
+      margin-left: 10px;
+  }
+  .ATC_button a .btn_arrow_black{
+      display: none;
+  }
+  .ATC_button a:hover .btn_arrow_black{
+      display: block !important;
+  }
+  .ATC_button a:hover .btn_arrow_white {
+      display: none !important;
+  }
 </style>
 <section id="product-hotspot-section" class="product-hotspot-section">
   <h2 class="product-hotspot-section_title">{{ section.settings.title }}</h2>
@@ -108,7 +161,9 @@
       <form id="popup-product-form" action="/cart/add" method="post">
         <span>Size <br></span>
         <select id="popup-product-variants" name="id"></select>
-        <button type="submit">ADD TO CART </button>
+        <div class="ATC_button cus_button">
+          <a type="submit" href="{{ section.settings.b_url }}"><span>ADD TO CART <img class="btn_arrow btn_arrow_black" src="https://cdn.shopify.com/s/files/1/0709/6339/6854/files/Line_15.png?v=1720114463"> <img class="btn_arrow btn_arrow_white" src="https://cdn.shopify.com/s/files/1/0709/6339/6854/files/Line_15_1.png?v=1720114805"></span></a>
+        </div>
       </form>  
     </div>  
   </div>  
