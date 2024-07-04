@@ -190,6 +190,7 @@
           document.getElementById('popup-product-image').src = product.images[0];
           document.getElementById('popup-product-title').innerText = product.title;
           document.getElementById('popup-product-price').innerText = '$' + (product.price / 100).toFixed(2);
+          document.getElementById('popup-product-desc').innerText = product.description;
 
           variantsDropdown.innerHTML = '';
           product.variants.forEach(variant => {
