@@ -35,7 +35,7 @@
 <div class="cus_banner">
   {% comment %} announcement bar {% endcomment %}
   <div class="banner_announcement">
-    <div class="b_logo">{{ section.settings.title }}</div>
+    <div class="b_logo"><img src="{{ section.settings.logo | img_url : 'master' }}"></div>
     <div class="announcement_text">{{ section.settings.ann_text }}</div>
     <div class="b_button cus_button">
       <a href="{{ section.settings.b_url }}">{{ section.settings.b_button_title }}</a>
@@ -70,10 +70,9 @@
       "content": "Announcement Bar"
     },
     {
-      "type": "text",
-      "id": "title",
-      "label": "Logo/Title",
-      "default": "TISSO VISON"
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Add logo"
     },
     {
       "type": "text",
