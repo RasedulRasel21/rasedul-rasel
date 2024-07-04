@@ -148,6 +148,17 @@
   .image-with-text-img .image_with_text_button{
       display: none;
   }
+  .bootomText{
+      margin: 0;
+      height: 34px;
+      background: #F5F5F5;
+      line-height: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+  }
   
   /* For mobile */
   @media only screen and (max-width: 757px){
@@ -291,7 +302,7 @@
       </div> 
     </div> 
     </div>
-    <p>{{ section.settings.bottomText }}</p>
+    <p class="bootomText">{{ section.settings.bottomText }}</p>
   </div>
 </div>
 
