@@ -1,7 +1,9 @@
 <style>
   .product-hotspot-container{
     display: grid;
-    grid-template-column: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 10px;
+    row-gap: 0;
   }
   .product-hotspot-item{
     position: relative;
@@ -26,7 +28,7 @@
   <div class="product-hotspot-container">
     {% for product in section.settings.products %}
       <div class="product-hotspot-item">
-        <img src="{{ product.featured_image | img_url: 'master' }}" alt="{{ product.title }}" class="product-hotspot-image">
+        <img src="{{ product.featured_image | img_url: '444x444' }}" alt="{{ product.title }}" class="product-hotspot-image">
         <div class="product-hotspot-point" data-product-handle="{{ product.handle }}">
           <span class="product-hotspot-icon">+</span>
         </div>  
