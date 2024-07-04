@@ -26,7 +26,7 @@
   <div class="product-hotspot-container">
     {% for product in section.settings.products %}
       <div class="product-hotspot-item">
-        <img src="" alt="{{ product.title }}" class="product-hotspot-image">
+        <img src="{{ product.featured_image | img_url: '444x444' }}" alt="{{ product.title }}" class="product-hotspot-image">
         <div class="product-hotspot-point" data-product-handle="{{ product.handle }}">
           <span class="product-hotspot-icon">+</span>
         </div>  
