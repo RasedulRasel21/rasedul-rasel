@@ -31,6 +31,40 @@
       font-size: 18px;
       line-height: 28px;
   }
+  .cus_button a{
+      display: block;
+      width: auto;
+      height: 44px;
+      line-height: 40px;
+      font-size: 20px;
+      text-decoration: none;
+      color: #000;
+      border: 1px solid #000;
+      letter-spacing: 1px;
+      text-align: center;
+      position: relative;
+      transition: all .35s;
+  }
+  .cus_button a span{
+      position: relative;
+      z-index: 2;
+  }
+  .cus_button a:after{
+      position: absolute;
+      content: "";
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: #FFF544;
+      transition: all .35s;
+  }
+  .cus_button a:hover{
+      color: #fff;
+  }
+  .cus_button a:hover:after{
+      width: 100%;
+  }
 </style>
 <div class="cus_banner">
   {% comment %} announcement bar {% endcomment %}
@@ -38,7 +72,7 @@
     <div class="b_logo"><img src="{{ section.settings.logo | img_url : 'master' }}"></div>
     <div class="announcement_text">{{ section.settings.ann_text }}</div>
     <div class="b_button cus_button">
-      <a href="{{ section.settings.b_url }}">{{ section.settings.b_button_title }}</a>
+      <a href="{{ section.settings.b_url }}"><span>{{ section.settings.b_button_title }}</span></a>
     </div>
   </div>
 
