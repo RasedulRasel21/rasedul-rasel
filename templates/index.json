@@ -12,7 +12,7 @@
     "banner_GDNneg": {
       "type": "banner",
       "settings": {
-        "title": "TISSO VISON",
+        "logo": "shopify:\/\/shop_images\/Group_1000007777.png",
         "ann_text": "Find the ideal gift for your loved ones.",
         "b_button_title": "CHOOSE GIFT",
         "b_url": "shopify:\/\/collections\/frontpage",
