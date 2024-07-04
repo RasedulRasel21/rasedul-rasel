@@ -1,6 +1,64 @@
-{% schema %}
-  {
-    "name": "Section name",
-    "settings": []
+<style>
+  .product-hotspot-container{
+    display: grid;
+    grid-template-column: 1fr 1fr 1fr;
   }
+  .product-hotspot-item{
+    position: relative;
+  }
+  .product-hotspot-image{
+    max-width: 100%;
+    height: auto;
+  }
+  .product-hotspot-point{
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    background: #fff;
+    color: #000;
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+  }
+</style>
+<section id="product-hotspot-section" class="product-hotspot-section">
+  <h2 class="product-hotspot-section_title">{{ section.settings.title }}</h2>
+  <div class="product-hotspot-container">
+    {% for product in section.settings.products %}
+      <div class="product-hotspot-item">
+        <img src="" alt="{{ product.title }}" class="product-hotspot-image">
+        <div class="product-hotspot-point" data-product-handle="{{ product.handle }}">
+          <span class="product-hotspot-icon">+</span>
+        </div>  
+      </div>  
+    {% endfor %}  
+  </div>  
+</section>
+{% schema %}
+{
+  "name": "Product grid with hotspot",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Tisso vison in the wild"
+    },
+    {
+      "type": "product_list",
+      "id": "products",
+      "label": "Products"
+    }
+
+  ],
+  "presets": [
+    {
+      "name": "Product grid with hotspot"
+    }
+  ]
+}
 {% endschema %}
