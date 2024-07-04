@@ -190,16 +190,16 @@
 
 <script>
   const menuOpen = document.getElementById('menuOpen');
-const menuClose = document.getElementById('menuclose');
-const headerIcon = document.getElementById('headerIcon');
-
-menuOpen.addEventListener('click', function() {
-  headerIcon.classList.add('menu_active');
-});
-
-menuClose.addEventListener('click', function() {
-  headerIcon.classList.remove('menu_active');
-});
+  const menuClose = document.getElementById('menuclose');
+  const headerIcon = document.getElementById('headerIcon');
+  
+  menuOpen.addEventListener('click', function() {
+    headerIcon.classList.add('menu_active');
+  });
+  
+  menuClose.addEventListener('click', function() {
+    headerIcon.classList.remove('menu_active');
+  });
 
 </script>
 {% schema %}
