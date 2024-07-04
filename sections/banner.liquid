@@ -67,6 +67,20 @@
   .cus_button a:hover:after{
       width: 100%;
   }
+  .btn_arrow{
+      width: 24px;
+      animation: auto;
+      margin-left: 10px;
+  }
+  .b_button .btn_arrow_black:hover{
+      display: none;
+  }
+  .b_button .btn_arrow_white {
+      display: none;
+  }
+  .b_button .btn_arrow_white:hover {
+      display: block !important;
+  }
 </style>
 <div class="cus_banner">
   {% comment %} announcement bar {% endcomment %}
@@ -74,7 +88,7 @@
     <div class="b_logo"><img src="{{ section.settings.logo | img_url : 'master' }}"></div>
     <div class="announcement_text">{{ section.settings.ann_text }}</div>
     <div class="b_button cus_button">
-      <a href="{{ section.settings.b_url }}"><span>{{ section.settings.b_button_title }} <img src="https://cdn.shopify.com/s/files/1/0709/6339/6854/files/Line_15.png?v=1720114463"></span></a>
+      <a href="{{ section.settings.b_url }}"><span>{{ section.settings.b_button_title }} <img class="btn_arrow btn_arrow_black" src="https://cdn.shopify.com/s/files/1/0709/6339/6854/files/Line_15.png?v=1720114463"> <img class="btn_arrow btn_arrow_white" src="https://cdn.shopify.com/s/files/1/0709/6339/6854/files/Line_15_1.png?v=1720114805"></span></a>
     </div>
   </div>
 
