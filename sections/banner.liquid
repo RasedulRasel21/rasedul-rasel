@@ -198,6 +198,18 @@
     .mb_menu .b_button a {
       display: block !important;
     }
+    .image-with-text {
+      flex-direction: column;
+   }
+    .image-with-text-textBox{
+      text-align: center;
+    }
+    .image-with-text-textBox .image_with_text_button{
+      display: none;
+    }
+    .image-with-text-img .image_with_text_button{
+      display: block !important;
+    }
   }
 
 </style>
@@ -235,6 +247,10 @@
     </div>
     <div class="image-with-text-img">
       <img src="{{ section.settings.banner_text_image | img_url : 'master' }}">
+      <div class="image_with_text_button cus_button">
+        <a href="{{ section.settings.img_text_btn_url }}"><span>{{ section.settings.img_text_btn }} <img class="btn_arrow btn_arrow_black" src="https://cdn.shopify.com/s/files/1/0709/6339/6854/files/Line_15.png?v=1720114463"> <img class="btn_arrow btn_arrow_white" src="https://cdn.shopify.com/s/files/1/0709/6339/6854/files/Line_15_1.png?v=1720114805"></span></a>
+      </div> 
+    </div> 
     </div>
   </div>
 </div>
