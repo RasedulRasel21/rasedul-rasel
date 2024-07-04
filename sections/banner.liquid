@@ -91,6 +91,30 @@
   .b_button a:hover .btn_arrow_white {
       display: block !important;
   }
+  .image_with_text_button a:hover .btn_arrow_black{
+      display: block !important;
+  }
+  .image_with_text_button .btn_arrow_white {
+      display: none;
+  }
+  .image_with_text_button a:hover .btn_arrow_white {
+      display: none !important;
+  }
+  .image_with_text_button a{
+      background: #000;
+      color: #fff;
+  }
+  .image_with_text_button a:after{
+      position: absolute;
+      content: "";
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: #FFF544;
+      color: #000;
+      transition: all .35s;
+  }
 </style>
 <div class="cus_banner">
   {% comment %} announcement bar {% endcomment %}
