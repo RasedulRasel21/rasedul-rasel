@@ -90,42 +90,46 @@
   </div>  
 </section>
 <script>
-  document.addEventListener('DOMContentLoaded' function(){
-    var hotspotPoints = document.querySelectorAll('.product-hotspot-point');
-    var popup = document.querySelectorAll('.product-popup');
-    var closeBtn = document.querySelectorAll('.product-popup-close');
-    var productForm = document.querySelectorAll('.popup-product-form');
-    var variantsDropdown = document.querySelectorAll('.popup-product-variants');
+  document.addEventListener('DOMContentLoaded', function() {
+  var hotspotPoints = document.querySelectorAll('.product-hotspot-point');
+  var popup = document.getElementById('product-popup');
+  var closeBtn = document.querySelector('.product-popup-close');
+  var productForm = document.getElementById('popup-product-form');
+  var variantsDropdown = document.getElementById('popup-product-variants');
 
-    hotspotPoints.forEach(function(point){
-      point.addEventListener('clcik', function(){
-        var productHandle = this.dataset.productHandle;
-        fetch('/products/' productHandle + '.js')
+  hotspotPoints.forEach(function(point) {
+    point.addEventListener('click', function() {
+      var productHandle = this.dataset.productHandle;
+      fetch('/products/' + productHandle + '.js')
         .then(response => response.json())
         .then(product => {
           document.getElementById('popup-product-image').src = product.images[0];
           document.getElementById('popup-product-title').innerText = product.title;
           document.getElementById('popup-product-price').innerText = '$' + (product.price / 100).toFixed(2);
-          document.getElementById('popup-product-desc').innerText = product.description;
 
-          variantsDropdown.innerHTML=";
+          variantsDropdown.innerHTML = '';
           product.variants.forEach(variant => {
             var option = document.createElement('option');
             option.value = variant.id;
-            option.text = variant.title;
+            option.text = variant.title + ' - $' + (variant.price / 100).toFixed(2);
             variantsDropdown.appendChild(option);
           });
+
           popup.style.display = 'block';
         });
-      });
-    });
-    closeBtn.addEventListener('click', function(){
-      if(event.target == popup){
-        popup.style.display = 'none';
-      }
-    };
     });
   });
+
+  closeBtn.addEventListener('click', function() {
+    popup.style.display = 'none';
+  });
+
+  window.onclick = function(event) {
+    if (event.target == popup) {
+      popup.style.display = 'none';
+    }
+  };
+});
 </script>
 {% schema %}
 {
