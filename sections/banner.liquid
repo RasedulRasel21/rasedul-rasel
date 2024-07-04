@@ -127,6 +127,9 @@
   .header_mb_icon{
       display: none;
   }
+  .mb_menu{
+      display: none;
+  }
   @media only screen and (max-width: 757px){
     .banner_announcement{
       justify-content: space-between;
@@ -143,6 +146,12 @@
     .header_mb_icon .cus_close{
       display: none;
     }
+    .menu_active .cus_close{
+      display: block !important;
+    }
+    .menu_active .cus_humb{
+      display: none;
+    }
     .header_mb_icon .icon{
       display: flex;
       opacity: 1;
@@ -153,6 +162,9 @@
       fill: none;
       vertical-align: middle;
     }
+    .mb_menu{
+      display: flex !important;
+  }
   }
 
 </style>
@@ -169,6 +181,12 @@
       <a href="{{ section.settings.b_url }}"><span>{{ section.settings.b_button_title }} <img class="btn_arrow btn_arrow_black" src="https://cdn.shopify.com/s/files/1/0709/6339/6854/files/Line_15.png?v=1720114463"> <img class="btn_arrow btn_arrow_white" src="https://cdn.shopify.com/s/files/1/0709/6339/6854/files/Line_15_1.png?v=1720114805"></span></a>
     </div>
   </div>
+  <div class="mb_menu">
+    <div class="announcement_text">{{ section.settings.ann_text }}</div>
+    <div class="b_button cus_button">
+      <a href="{{ section.settings.b_url }}"><span>{{ section.settings.b_button_title }} <img class="btn_arrow btn_arrow_black" src="https://cdn.shopify.com/s/files/1/0709/6339/6854/files/Line_15.png?v=1720114463"> <img class="btn_arrow btn_arrow_white" src="https://cdn.shopify.com/s/files/1/0709/6339/6854/files/Line_15_1.png?v=1720114805"></span></a>
+    </div>
+  </div>  
 
   {% comment %} Banner section {% endcomment %}
   <div class="banner_image">
