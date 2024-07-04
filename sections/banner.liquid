@@ -1,37 +1,60 @@
 <style>
-    .cus_banner{
-        display: flex;
-        flex-direction: column;
-    }
-    .banner_announcement{
-        display: flex;
-        height: 64px;
-        justify-content: space-between;
-        align-items: center;
-    }
+  img{
+      width: 100%;
+      height: auto;
+  }
+  .cus_banner{
+      display: flex;
+      flex-direction: column;
+  }
+  .banner_announcement{
+      display: flex;
+      height: 64px;
+      justify-content: space-between;
+      align-items: center;
+      padding-left: 5rem;
+      padding-right: 5rem;
+  }
+  .image-with-text{
+      display: flex;
+      padding-left: 5rem;
+      padding-right: 5rem;
+  }
+  .image-with-text-textBox h2{
+      font-size: 60px;
+      margin: 20px 0;
+      font-weight: 600;
+  }
+  .image-with-text-textBox p{
+      max-width: 490px;
+      font-size: 18px;
+      line-height: 28px;
+  }
 </style>
 <div class="cus_banner">
-    {% comment %} announcement bar {% endcomment %}
-    <div class="banner_announcement">
-        <div class="b_logo">{{ section.settings.title }}</div>
-        <div class="announcement_text">{{ section.settings.ann_text }}</div>
-        <div class="b_button cus_button"><a href="{{ section.settings.b_url }}">{{ section.settings.b_button_title }}</a></div>
+  {% comment %} announcement bar {% endcomment %}
+  <div class="banner_announcement">
+    <div class="b_logo">{{ section.settings.title }}</div>
+    <div class="announcement_text">{{ section.settings.ann_text }}</div>
+    <div class="b_button cus_button">
+      <a href="{{ section.settings.b_url }}">{{ section.settings.b_button_title }}</a>
     </div>
+  </div>
 
-    {% comment %} Banner section {% endcomment %}
-    <div class="banner_image">
-        <img src="{{ section.settings.b_image | img_url : 'master' }}">
+  {% comment %} Banner section {% endcomment %}
+  <div class="banner_image">
+    <img src="{{ section.settings.b_image | img_url : 'master' }}">
+  </div>
+  <div class="image-with-text">
+    <div class="image-with-text-textBox">
+      <h2>{{ section.settings.img_text_title }}</h2>
+      <p>{{ section.settings.img_text_subtext }}</p>
+      <a href="{{ section.settings.img_text_btn_url }}" class="cus_button">{{ section.settings.img_text_btn }}</a>
     </div>
-    <div class="image-with-text">
-        <div class="image-with-text-textBox">
-           <h2>{{ section.settings.img_text_title }}</h2>
-           <p>{{ section.settings.img_text_subtext }}</p>
-           <a href="{{ section.settings.img_text_btn_url }}" class="cus_button">{{ section.settings.img_text_btn }}</a>
-        </div>
-        <div class="image-with-text-img">
-           <img src="{{ section.settings.banner_text_image | img_url : 'master' }}"> 
-        </div> 
-    </div>     
+    <div class="image-with-text-img">
+      <img src="{{ section.settings.banner_text_image | img_url : 'master' }}">
+    </div>
+  </div>
 </div>
 {% schema %}
 {
@@ -105,7 +128,7 @@
       "id": "banner_text_image",
       "label": "Banner text image"
     }
-    
+
   ],
   "presets": [
     {
