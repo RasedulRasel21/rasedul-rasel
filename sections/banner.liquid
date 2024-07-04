@@ -124,20 +124,35 @@
   .image_with_text_button a:hover{
       color: #000;
   }
-
+  .header_mb_icon{
+      display: none;
+  }
   @media only screen and (max-width: 757px){
-  .b_button{
+    .banner_announcement{
+      justify-content: center;
+    }  
+    .b_button{
       display: none;
-  }    
-  .announcement_text{
+    }    
+    .announcement_text{
       display: none;
-  }  
+    }  
+    .header_mb_icon{
+      display: block;
+  }
+    .header_mb_icon .cus_close{
+      display: none;
+    }
   }
 
 </style>
 <div class="cus_banner">
   {% comment %} announcement bar {% endcomment %}
   <div class="banner_announcement">
+    <div class="header_mb_icon">
+      <span class="cus_humb">{% render 'icon-hamburger' %}</span>
+      <span class="cus_close">{% render 'icon-close' %}</span>
+    </div>  
     <div class="b_logo"><img src="{{ section.settings.logo | img_url : 'master' }}"></div>
     <div class="announcement_text">{{ section.settings.ann_text }}</div>
     <div class="b_button cus_button">
