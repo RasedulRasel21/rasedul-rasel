@@ -190,14 +190,17 @@
 
 <script>
   const menuOpen = document.getElementById('menuOpen');
-  const menuclose = document.getElementById('menuclose');
-  const headerIcon = document.getElementById('headerIcon');
-  menuOpen.addEventListener('clcik', function(){
-    this.classList.add('menu_active');
-  });
-  menuclose.addEventListener('clcik', function(){
-    headerIcon.classList.remove('menu_active');
-  });
+const menuClose = document.getElementById('menuclose');
+const headerIcon = document.getElementById('headerIcon');
+
+menuOpen.addEventListener('click', function() {
+  headerIcon.classList.add('menu_active');
+});
+
+menuClose.addEventListener('click', function() {
+  headerIcon.classList.remove('menu_active');
+});
+
 </script>
 {% schema %}
 {
