@@ -89,6 +89,44 @@
     </div>  
   </div>  
 </section>
+<script>
+  document.addEventListener('DOMContentLoaded' function(){
+    var hotspotPoints = document.querySelectorAll('.product-hotspot-point');
+    var popup = document.querySelectorAll('.product-popup');
+    var closeBtn = document.querySelectorAll('.product-popup-close');
+    var productForm = document.querySelectorAll('.popup-product-form');
+    var variantsDropdown = document.querySelectorAll('.popup-product-variants');
+
+    hotspotPoints.forEach(function(point){
+      point.addEventListener('clcik', function(){
+        var productHandle = this.dataset.productHandle;
+        fetch('/products/' productHandle + '.js')
+        .then(response => response.json())
+        .then(product => {
+          document.getElementById('popup-product-image').src = product.images[0];
+          document.getElementById('popup-product-title').innerText = product.title;
+          document.getElementById('popup-product-price').innerText = '$' + (product.price / 100).toFixed(2);
+          document.getElementById('popup-product-desc').innerText = product.description;
+
+          variantsDropdown.innerHTML=";
+          product.variants.forEach(variant => {
+            var option = document.createElement('option');
+            option.value = variant.id;
+            option.text = variant.title;
+            variantsDropdown.appendChild(option);
+          });
+          popup.style.display = 'block';
+        });
+      });
+    });
+    closeBtn.addEventListener('click', function(){
+      if(event.target == popup){
+        popup.style.display = 'none';
+      }
+    };
+    });
+  });
+</script>
 {% schema %}
 {
   "name": "Product grid with hotspot",
