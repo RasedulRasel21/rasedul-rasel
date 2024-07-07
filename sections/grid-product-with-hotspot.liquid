@@ -268,7 +268,7 @@
       </div>
       <form id="popup-product-form" action="/cart/add" method="post">
         <span class="variant_title">Color <br></span>
-        <div id="popup-product-colors" class="color-pills" {{ variant.title }}></div>
+        <div id="popup-product-colors" class="color-pills {{ variant.title }}"></div>
         <span class="variant_title">Size <br></span>
         <select id="popup-product-sizes" name="size"></select>
         <input type="hidden" id="popup-variant-id" name="id">
