@@ -395,7 +395,7 @@ document.addEventListener('DOMContentLoaded', function() {
         productVariants.forEach(variant => {
           if ((colorOptionIndex === -1 || variant[`option${colorOptionIndex + 1}`] === selectedColor) && 
               (sizeOptionIndex === -1 || variant[`option${sizeOptionIndex + 1}`] === selectedSize)) {
-            variantIdInput.value = variant.title;
+            variantIdInput.value = variant.id;
           }
         });
       }
