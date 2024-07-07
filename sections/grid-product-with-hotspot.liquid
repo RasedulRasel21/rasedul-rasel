@@ -148,6 +148,26 @@
   .product-hotspot-section_title{
     font-size: 36px;
   }
+  .color-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.color-pill {
+  padding: 10px 20px;
+  border: 1px solid #000;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.color-pill.active {
+  background-color: #000;
+  color: #fff;
+}
+
   @media only screen and (max-width: 757px){
   .product-hotspot-container {
     grid-template-columns: 1fr 1fr !important;
@@ -167,12 +187,12 @@
     {% for product in section.settings.products %}
       <div class="product-hotspot-item">
         <img src="{{ product.featured_image | img_url: '444x444' }}" alt="{{ product.title }}" class="product-hotspot-image">
-        <div class="product-hotspot-point" data-product-handle="{{ product.handle }}">
+        <div class="product-hotspot-point" data-product-handle="{{ product.handle }}" data-product-variants='{{ product.variants | json }}' data-product-options='{{ product.options | json }}'>
           <span class="product-hotspot-icon">+</span>
-        </div>  
-      </div>  
-    {% endfor %}  
-  </div>  
+        </div>
+      </div>
+    {% endfor %}
+  </div>
 
   <div class="product-popup" id="product-popup">
     <div class="product-popup-content">
@@ -188,44 +208,141 @@
         </div>
       </div>
       <form id="popup-product-form" action="/cart/add" method="post">
+        <span>Color <br></span>
+        <div id="popup-product-colors" class="color-pills"></div>
         <span>Size <br></span>
-        <select id="popup-product-variants" name="id"></select>
+        <select id="popup-product-sizes" name="size"></select>
+        <input type="hidden" id="popup-variant-id" name="id">
         <div class="ATC_button cus_button">
-          <button type="submit"><span>ADD TO CART <img class="btn_arrow btn_arrow_black" src="https://cdn.shopify.com/s/files/1/0709/6339/6854/files/Line_15.png?v=1720114463"> <img class="btn_arrow btn_arrow_white" src="https://cdn.shopify.com/s/files/1/0709/6339/6854/files/Line_15_1.png?v=1720114805"></span></button>
+          <button id="" class="atcBtn" type="submit"><span>ADD TO CART <img class="btn_arrow btn_arrow_black" src="https://cdn.shopify.com/s/files/1/0709/6339/6854/files/Line_15.png?v=1720114463"> <img class="btn_arrow btn_arrow_white" src="https://cdn.shopify.com/s/files/1/0709/6339/6854/files/Line_15_1.png?v=1720114805"></span></button>
         </div>
-      </form>  
-    </div>  
-  </div>  
+      </form>
+    </div>
+  </div>
 </section>
+
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
   var hotspotPoints = document.querySelectorAll('.product-hotspot-point');
   var popup = document.getElementById('product-popup');
   var closeBtn = document.querySelector('.product-popup-close');
-  var productForm = document.getElementById('popup-product-form');
-  var variantsDropdown = document.getElementById('popup-product-variants');
+  var atcBtn = document.querySelector('.atcBtn');
+  var colorsContainer = document.getElementById('popup-product-colors');
+  var sizesDropdown = document.getElementById('popup-product-sizes');
+  var variantIdInput = document.getElementById('popup-variant-id');
+  var selectedColor = null;
+  var selectedSize = null;
 
   hotspotPoints.forEach(function(point) {
     point.addEventListener('click', function() {
       var productHandle = this.dataset.productHandle;
+      var productVariants = JSON.parse(this.dataset.productVariants);
+      var productOptions = JSON.parse(this.dataset.productOptions);
+
+      // Get the index of the color and size options
+      var colorOptionIndex = productOptions.indexOf("Color");
+      var sizeOptionIndex = productOptions.indexOf("Size");
+
+      if (colorOptionIndex !== -1) {
+        colorsContainer.innerHTML = '';
+        var uniqueColors = new Set();
+        var colorVariantMap = {};
+
+        productVariants.forEach(variant => {
+          var color = variant[`option${colorOptionIndex + 1}`];
+          if (color) {
+            uniqueColors.add(color);
+            if (!colorVariantMap[color]) {
+              colorVariantMap[color] = variant.id;
+            }
+          }
+        });
+
+        uniqueColors.forEach(color => {
+          var pill = document.createElement('div');
+          pill.className = 'color-pill';
+          pill.innerText = color;
+          pill.dataset.variantId = colorVariantMap[color];
+          pill.addEventListener('click', function() {
+            document.querySelectorAll('.color-pill').forEach(pill => pill.classList.remove('active'));
+            this.classList.add('active');
+            selectedColor = this.innerText;
+            updateVariantId();
+          });
+          colorsContainer.appendChild(pill);
+        });
+
+        // Select the first color by default
+        var firstColorPill = colorsContainer.querySelector('.color-pill');
+        if (firstColorPill) {
+          firstColorPill.click();
+        }
+      } else {
+        colorsContainer.style.display = 'none';
+      }
+
+      if (sizeOptionIndex !== -1) {
+        sizesDropdown.innerHTML = '';
+        var uniqueSizes = new Set();
+        var sizeVariantMap = {};
+
+        productVariants.forEach(variant => {
+          var size = variant[`option${sizeOptionIndex + 1}`];
+          if (size) {
+            uniqueSizes.add(size);
+            if (!sizeVariantMap[size]) {
+              sizeVariantMap[size] = variant.id;
+            }
+          }
+        });
+
+        uniqueSizes.forEach(size => {
+          var option = document.createElement('option');
+          option.value = sizeVariantMap[size];
+          option.text = size;
+          sizesDropdown.appendChild(option);
+        });
+
+        sizesDropdown.addEventListener('change', function() {
+          selectedSize = this.options[this.selectedIndex].text;
+          updateVariantId();
+        });
+
+        // Select the first size by default
+        var firstSizeOption = sizesDropdown.querySelector('option');
+        if (firstSizeOption) {
+          sizesDropdown.value = firstSizeOption.value;
+          sizesDropdown.dispatchEvent(new Event('change'));
+        }
+      } else {
+        sizesDropdown.style.display = 'none';
+      }
+
+      // Fetch the rest of the product details
       fetch('/products/' + productHandle + '.js')
         .then(response => response.json())
         .then(product => {
           document.getElementById('popup-product-image').src = product.images[0];
+          atcBtn.dataset.handle = product.handle;
           document.getElementById('popup-product-title').innerText = product.title;
           document.getElementById('popup-product-price').innerText = '$' + (product.price / 100).toFixed(2);
-          document.getElementById('popup-product-desc').innerText = product.description;
-
-          variantsDropdown.innerHTML = '';
-          product.variants.forEach(variant => {
-            var option = document.createElement('option');
-            option.value = variant.id;
-            option.text = variant.title + ' - $' + (variant.price / 100).toFixed(2);
-            variantsDropdown.appendChild(option);
-          });
+          document.getElementById('popup-product-desc').innerText = product.description.replace(/(<([^>]+)>)/gi, "");
 
           popup.style.display = 'block';
         });
+
+      // Set variant ID based on selected color and size
+      function updateVariantId() {
+        productVariants.forEach(variant => {
+          if ((colorOptionIndex === -1 || variant[`option${colorOptionIndex + 1}`] === selectedColor) && 
+              (sizeOptionIndex === -1 || variant[`option${sizeOptionIndex + 1}`] === selectedSize)) {
+            variantIdInput.value = variant.id;
+          }
+        });
+      }
+
+      // Initialize variant ID
+      updateVariantId();
     });
   });
 
@@ -238,7 +355,47 @@
       popup.style.display = 'none';
     }
   };
+
+  atcBtn.addEventListener('click', function() {
+    var variantId = variantIdInput.value;
+    addToCart(variantId, function() {
+      if (selectedColor === 'Black' && selectedSize === 'M') {
+        addToCart(49115160772891); // Soft Winter Jacket variant ID
+      }
+    });
+  });
+
+  function addToCart(variantId, callback) {
+    var xhr = new XMLHttpRequest();
+    var url = "/cart/add.js";
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        fetch(`${routes.cart_url}?section_id=cart-drawer`)
+          .then(response => response.text())
+          .then(responseText => {
+            const html = new DOMParser().parseFromString(responseText, 'text/html');
+            const selectors = ['cart-drawer-items', '.cart-drawer__footer'];
+            for (const selector of selectors) {
+              const targetElement = document.querySelector(selector);
+              const sourceElement = html.querySelector(selector);
+              if (targetElement && sourceElement) {
+                targetElement.replaceWith(sourceElement);
+              }
+            }
+            if (callback) callback();
+          })
+          .catch(e => {
+            console.error(e);
+          });
+      }
+    };
+    var data = JSON.stringify({ "quantity": 1, "id": variantId });
+    xhr.send(data);
+  }
 });
+
 </script>
 {% schema %}
 {
