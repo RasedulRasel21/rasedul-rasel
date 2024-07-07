@@ -1,222 +1,237 @@
 <style>
-  .product-hotspot-section{
-    padding-left: 5rem;
-    padding-right: 5rem;
-    max-width: 1440px;
-    margin: 0 auto;
-    padding-top: 50px;
-  }
-  .product-hotspot-container{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 10px;
-    row-gap: 0;
-  }
-  .product-hotspot-item{
-    position: relative;
-  }
-  .product-hotspot-image{
-    max-width: 100%;
-    height: 444px;
-    object-fit: cover;
-  }
-  .product-hotspot-icon{
-    transform: translate(0px, -1px);
-  }
-  
-  .product-hotspot-point{
-    position: absolute;
-    top: 10%;
-    right: 40%;
-    background: #fff;
-    color: #000;
-    border-radius: 50%;
-    padding: 5px;
-    cursor: pointer;
-    width: 22px;
-    height: 22px;
+    .product-hotspot-section{
+      padding-left: 5rem;
+      padding-right: 5rem;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding-top: 50px;
+    }
+    .product-hotspot-container{
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-gap: 10px;
+      row-gap: 0;
+    }
+    .product-hotspot-item{
+      position: relative;
+    }
+    .product-hotspot-image{
+      max-width: 100%;
+      height: 444px;
+      object-fit: cover;
+    }
+    .product-hotspot-icon{
+      transform: translate(0px, -1px);
+    }
+
+    .product-hotspot-point{
+      position: absolute;
+      top: 10%;
+      right: 40%;
+      background: #fff;
+      color: #000;
+      border-radius: 50%;
+      padding: 5px;
+      cursor: pointer;
+      width: 22px;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 0;
+    }
+    .product-popup{
+      display: none;
+      position: fixed;
+      left: 50%;
+      right: 50%;
+      width: 380px;
+      height: auto;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff;
+      padding: 20px;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      z-index: 9999;
+    }
+    .product-popup-content{
+      position: relative;
+    }
+    .product-popup-close{
+      position: absolute;
+      top: -25px;
+      right: 10px;
+      cursor: pointer;
+      font-size: 25px;
+    }
+    .pp_top{
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .pp_top_left{
+      width: 50%;
+    }
+    #popup-product-form{
+      display: flex;
+      flex-direction: column;
+    }
+    #popup-product-title{
+      margin: 0;
+      font-size: 18px;
+    }
+    #popup-product-price{
+      font-size: 18px;
+      color: #000;
+    }
+    #popup-product-variants{
+      padding: 14px;
+      margin-bottom: 20px;
+    }
+
+    .ATC_button button{
+        display: flex;
+        width: 100%;
+        height: 44px;
+        align-items: center;
+        font-size: 16px;
+        text-decoration: none;
+        background: #000;
+        color: #fff;
+        text-align: center;
+        position: relative;
+        transition: all .35s;
+        padding: 0 24px;
+        justify-content: center;
+        cursor: pointer;
+    }
+    .ATC_button button span{
+        position: relative;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        height: 100%;
+        gap: 30px;
+    }
+    .ATC_button button:after{
+        position: absolute;
+        content: "";
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 100%;
+        background: #FFF544;
+        color: #000;
+        transition: all .35s;
+    }
+    .ATC_button button:hover{
+        color: #000;
+        border: unset !important;
+    }
+    .ATC_button button:hover:after{
+        width: 100%;
+    }
+    .btn_arrow{
+        width: 24px;
+        animation: auto;
+        margin-left: 10px;
+    }
+    .ATC_button button .btn_arrow_black{
+        display: none;
+    }
+    .ATC_button button:hover .btn_arrow_black{
+        display: block !important;
+    }
+    .ATC_button button:hover .btn_arrow_white {
+        display: none !important;
+    }
+    .pp_top_right{
+      width: 50%;
+    }
+    .pp_top_left img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .product-hotspot-section_title{
+      font-size: 36px;
+      font-weight: 400;
+    }
+    .color-pills {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    line-height: 0;
-  }
-  .product-popup{
-    display: none;
-    position: fixed;
-    left: 50%;
-    right: 50%;
-    width: 380px;
-    height: auto;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    background: #fff;
-    padding: 20px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    z-index: 9999;
-  }
-  .product-popup-content{
-    position: relative;
-  }
-  .product-popup-close{
-    position: absolute;
-    top: -25px;
-    right: 10px;
-    cursor: pointer;
-    font-size: 25px;
-  }
-  .pp_top{
-    display: flex;
+    flex-wrap: wrap;
     gap: 10px;
     margin-bottom: 20px;
   }
-  .pp_top_left{
-    width: 50%;
-  }
-  #popup-product-form{
-    display: flex;
-    flex-direction: column;
-  }
-  #popup-product-title{
-    margin: 0;
-    font-size: 18px;
-  }
-  #popup-product-price{
-    font-size: 18px;
-    color: #000;
-  }
-  #popup-product-variants{
-    padding: 14px;
-    margin-bottom: 20px;
+
+  .color-pill {
+    padding: 10px 20px;
+    border: 1px solid #000;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
   }
 
-  .ATC_button button{
-      display: flex;
-      width: 100%;
-      height: 44px;
-      align-items: center;
-      font-size: 16px;
-      text-decoration: none;
-      background: #000;
-      color: #fff;
-      text-align: center;
-      position: relative;
-      transition: all .35s;
-      padding: 0 24px;
-      justify-content: center;
-      cursor: pointer;
+  .color-pill.active {
+    background-color: #000;
+    color: #fff;
   }
-  .ATC_button button span{
-      position: relative;
-      z-index: 2;
-      display: flex;
-      align-items: center;
-      height: 100%;
-      gap: 30px;
-  }
-  .ATC_button button:after{
-      position: absolute;
-      content: "";
-      top: 0;
-      left: 0;
-      width: 0;
-      height: 100%;
-      background: #FFF544;
-      color: #000;
-      transition: all .35s;
-  }
-  .ATC_button button:hover{
-      color: #000;
-      border: unset !important;
-  }
-  .ATC_button button:hover:after{
-      width: 100%;
-  }
-  .btn_arrow{
-      width: 24px;
-      animation: auto;
-      margin-left: 10px;
-  }
-  .ATC_button button .btn_arrow_black{
-      display: none;
-  }
-  .ATC_button button:hover .btn_arrow_black{
-      display: block !important;
-  }
-  .ATC_button button:hover .btn_arrow_white {
-      display: none !important;
-  }
-  .pp_top_right{
-    width: 50%;
-  }
-  .pp_top_left img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  .product-hotspot-section_title{
-    font-size: 36px;
-    font-weight: 400;
-  }
-  .color-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 20px;
-}
 
-.color-pill {
-  padding: 10px 20px;
-  border: 1px solid #000;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.color-pill.active {
-  background-color: #000;
-  color: #fff;
-}
-
-  @media only screen and (max-width: 757px){
-  .product-hotspot-container {
-    grid-template-columns: 1fr 1fr !important;
-}
-    .product-hotspot-section {
-    padding-left: 25px !important;
-    padding-right: 25px !important;
-}
-    .product-hotspot-section_title{
-      font-size: 26px !important;
+    @media only screen and (max-width: 757px){
+      .product-hotspot-container {
+        grid-template-columns: 1fr 1fr !important;
+       }
+      .product-hotspot-section {
+        padding-left: 25px !important;
+        padding-right: 25px !important;
+       }
+      .product-hotspot-section_title{
+        font-size: 26px !important;
+       }
+      .product-hotspot-image {
+        height: 187px !important;
+       }
+      .product-hotspot-point {
+        right: 28% !important;
+       }
     }
-  }
-  @media only screen and (min-width: 991px){
-  #product-hotspot-section > div.product-hotspot-container > div:nth-child(1) > div{
-    transform: translate(20px, 200px);
-  }
-  #product-hotspot-section > div.product-hotspot-container > div:nth-child(2) > div{
-    transform: translate(115px, 174px);
-  }
-  #product-hotspot-section > div.product-hotspot-container > div:nth-child(3) > div{
-    transform: translate(20px, 30px);
-  }
-  #product-hotspot-section > div.product-hotspot-container > div:nth-child(4) > div{
-    transform: translate(60px, 26px);
-  }
-  #product-hotspot-section > div.product-hotspot-container > div:nth-child(5) > div{
-    transform: translate(-34px, 72px);
-  }
-  #product-hotspot-section > div.product-hotspot-container > div:nth-child(6) > div{
-    transform: translate(81px, 128px);
-  }
-  }
+    @media only screen and (min-width: 991px){
+    #product-hotspot-section > div.product-hotspot-container > div:nth-child(1) > div{
+      transform: translate(20px, 200px);
+    }
+    #product-hotspot-section > div.product-hotspot-container > div:nth-child(2) > div{
+      transform: translate(115px, 174px);
+    }
+    #product-hotspot-section > div.product-hotspot-container > div:nth-child(3) > div{
+      transform: translate(20px, 30px);
+    }
+    #product-hotspot-section > div.product-hotspot-container > div:nth-child(4) > div{
+      transform: translate(60px, 26px);
+    }
+    #product-hotspot-section > div.product-hotspot-container > div:nth-child(5) > div{
+      transform: translate(-34px, 72px);
+    }
+    #product-hotspot-section > div.product-hotspot-container > div:nth-child(6) > div{
+      transform: translate(81px, 128px);
+    }
+    }
 </style>
 <section id="product-hotspot-section" class="product-hotspot-section">
   <h2 class="product-hotspot-section_title">{{ section.settings.title }}</h2>
   <div class="product-hotspot-container">
     {% for product in section.settings.products %}
       <div class="product-hotspot-item">
-        <img src="{{ product.featured_image | img_url: '444x444' }}" alt="{{ product.title }}" class="product-hotspot-image">
-        <div class="product-hotspot-point" data-product-handle="{{ product.handle }}" data-product-variants='{{ product.variants | json }}' data-product-options='{{ product.options | json }}'>
+        <img
+          src="{{ product.featured_image | img_url: '444x444' }}"
+          alt="{{ product.title }}"
+          class="product-hotspot-image"
+        >
+        <div
+          class="product-hotspot-point"
+          data-product-handle="{{ product.handle }}"
+          data-product-variants="{{ product.variants | json }}"
+          data-product-options="{{ product.options | json }}"
+        >
           <span class="product-hotspot-icon">+</span>
         </div>
       </div>
@@ -243,7 +258,17 @@
         <select id="popup-product-sizes" name="size"></select>
         <input type="hidden" id="popup-variant-id" name="id">
         <div class="ATC_button cus_button">
-          <button id="" class="atcBtn" type="submit"><span>ADD TO CART <img class="btn_arrow btn_arrow_black" src="https://cdn.shopify.com/s/files/1/0709/6339/6854/files/Line_15.png?v=1720114463"> <img class="btn_arrow btn_arrow_white" src="https://cdn.shopify.com/s/files/1/0709/6339/6854/files/Line_15_1.png?v=1720114805"></span></button>
+          <button id="" class="atcBtn" type="submit">
+            <span
+              >ADD TO CART
+              <img
+                class="btn_arrow btn_arrow_black"
+                src="https://cdn.shopify.com/s/files/1/0709/6339/6854/files/Line_15.png?v=1720114463">
+              <img
+                class="btn_arrow btn_arrow_white"
+                src="https://cdn.shopify.com/s/files/1/0709/6339/6854/files/Line_15_1.png?v=1720114805"
+            ></span>
+          </button>
         </div>
       </form>
     </div>
@@ -424,7 +449,6 @@ document.addEventListener('DOMContentLoaded', function() {
     xhr.send(data);
   }
 });
-
 </script>
 {% schema %}
 {
