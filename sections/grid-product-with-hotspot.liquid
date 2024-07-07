@@ -181,7 +181,11 @@
     background-color: #000;
     color: #fff;
   }
-
+  .variant_title{
+    font-size: 14px;
+    color: #000;
+    margin-bottom: 4px;
+  }
   @media only screen and (max-width: 757px){
     .product-hotspot-container {
       grid-template-columns: 1fr 1fr !important;
@@ -248,9 +252,9 @@
         </div>
       </div>
       <form id="popup-product-form" action="/cart/add" method="post">
-        <span>Color <br></span>
+        <span class="variant_title">Color <br></span>
         <div id="popup-product-colors" class="color-pills"></div>
-        <span>Size <br></span>
+        <span class="variant_title">Size <br></span>
         <select id="popup-product-sizes" name="size"></select>
         <input type="hidden" id="popup-variant-id" name="id">
         <div class="ATC_button cus_button">
