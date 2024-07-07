@@ -319,7 +319,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         uniqueColors.forEach(color => {
           var pill = document.createElement('div');
-          pill.className = 'color-pill';
+          pill.className = 'color-pill ' + color.toLowerCase().replace(/\s+/g, '-'); // Add color as class
           pill.innerText = color;
           pill.dataset.variantId = colorVariantMap[color];
           pill.addEventListener('click', function() {
@@ -419,7 +419,9 @@ document.addEventListener('DOMContentLoaded', function() {
     var variantId = variantIdInput.value;
     addToCart(variantId, function() {
       if (selectedColor === 'Black' && selectedSize === 'M') {
-        addToCart(46960161325302); // Soft Winter Jacket variant ID
+        addToCart(46960161325302, updateCartDrawer); // Soft Winter Jacket variant ID
+      } else {
+        updateCartDrawer();
       }
     });
   });
@@ -431,27 +433,32 @@ document.addEventListener('DOMContentLoaded', function() {
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onreadystatechange = function() {
       if (xhr.readyState === 4 && xhr.status === 200) {
-        fetch(`${routes.cart_url}?section_id=cart-drawer`)
-          .then(response => response.text())
-          .then(responseText => {
-            const html = new DOMParser().parseFromString(responseText, 'text/html');
-            const selectors = ['cart-drawer-items', '.cart-drawer__footer'];
-            for (const selector of selectors) {
-              const targetElement = document.querySelector(selector);
-              const sourceElement = html.querySelector(selector);
-              if (targetElement && sourceElement) {
-                targetElement.replaceWith(sourceElement);
-              }
-            }
-            if (callback) callback();
-          })
-          .catch(e => {
-            console.error(e);
-          });
+        if (callback) callback();
       }
     };
     var data = JSON.stringify({ "quantity": 1, "id": variantId });
     xhr.send(data);
+  }
+
+  function updateCartDrawer() {
+    // Open cart drawer and refresh contents
+    document.getElementById('cart-icon-bubble').click();
+    document.querySelector('cart-drawer').classList.remove('is-empty');
+    document.querySelector('.drawer__inner-empty').style.display = 'none';
+
+    fetch(location.href, { method: 'GET' })
+      .then(response => response.text())
+      .then(html => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+
+        // Replace cart drawer content
+        document.querySelector('cart-drawer').innerHTML = doc.querySelector('#cartDrawer').innerHTML;
+        document.getElementById('cart-icon-bubble').innerHTML = doc.querySelector('#cart-icon-bubble').innerHTML;
+      })
+      .catch(e => {
+        console.error(e);
+      });
   }
 });
 
