@@ -7,9 +7,6 @@
     font-family: "Jost", sans-serif;
     font-weight: 400;
   }
-  div{
-    font-family: "Jost", sans-serif;
-  }
   .header{
     display: none;
   }
@@ -26,7 +23,7 @@
       padding-right: 5rem;
       background: #F5F5F5;
   }
-  .announcement_text{
+  .announcement_text p{
       color: #000;
       font-size: 16px;
   }
@@ -281,7 +278,7 @@
       <span class="cus_close" id="menuclose">{% render 'icon-close' %}</span>
     </div>  
     <div class="b_logo"><img src="{{ section.settings.logo | img_url : 'master' }}"></div>
-    <div class="announcement_text">{{ section.settings.ann_text }}</div>
+    <div class="announcement_text"><p>{{ section.settings.ann_text }}</p></div>
     <div class="b_button cus_button">
       <a href="{{ section.settings.b_url }}"><span>{{ section.settings.b_button_title }} <img class="btn_arrow btn_arrow_black" src="https://cdn.shopify.com/s/files/1/0709/6339/6854/files/Line_15.png?v=1720114463"> <img class="btn_arrow btn_arrow_white" src="https://cdn.shopify.com/s/files/1/0709/6339/6854/files/Line_15_1.png?v=1720114805"></span></a>
     </div>
