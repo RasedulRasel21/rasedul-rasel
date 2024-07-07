@@ -383,7 +383,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(product => {
           document.getElementById('popup-product-image').src = product.images[0];
           atcBtn.dataset.handle = product.handle;
-          document.getElementById('popup-product-title').innerText = product.title;
+          document.getElementById('popup-product-title').innerText = variant.title;
           document.getElementById('popup-product-price').innerText = '$' + (product.price / 100).toFixed(2);
           document.getElementById('popup-product-desc').innerText = product.description.replace(/(<([^>]+)>)/gi, "");
 
