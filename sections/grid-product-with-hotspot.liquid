@@ -321,7 +321,6 @@ document.addEventListener('DOMContentLoaded', function() {
           var pill = document.createElement('div');
           pill.className = 'color-pill';
           pill.innerText = color;
-          pill.dataset.variantId = colorVariantMap[color];
           pill.addEventListener('click', function() {
             document.querySelectorAll('.color-pill').forEach(pill => pill.classList.remove('active'));
             this.classList.add('active');
