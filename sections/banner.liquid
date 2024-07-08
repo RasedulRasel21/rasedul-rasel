@@ -1,0 +1,452 @@
+<style>
+  img{
+      width: 100%;
+      height: auto;
+  }
+  p{
+    font-family: "Jost", sans-serif;
+    font-weight: 400;
+  }
+  .header{
+    display: none;
+  }
+  .cus_banner{
+      display: flex;
+      flex-direction: column;
+  }
+  .banner_announcement{
+      display: flex;
+      height: 64px;
+      justify-content: space-between;
+      align-items: center;
+      padding-left: 5rem;
+      padding-right: 5rem;
+      background: #F5F5F5;
+  }
+  .announcement_text p{
+      color: #000;
+      font-size: 16px;
+  }
+  .b_logo{
+      display: flex;
+      align-items: center;
+  }
+  .image-with-text{
+      display: flex;
+      justify-content: space-between;
+      padding-left: 5rem;
+      padding-right: 0;
+      height: 402px;
+      max-width: 1440px;
+      margin: 0 auto;
+  }
+  .image-with-text-textBox h2{
+      font-size: 70px;
+      margin: 34px 0 0;
+      font-weight: 500;
+  }
+  .image-with-text-textBox p{
+      max-width: 483px;
+      font-size: 20px;
+      line-height: 28px;
+      margin: 0;
+  }
+  .image-with-text-textBox{
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+  }
+  .b_button{
+      width: 207px;
+  }
+  .cus_button a{
+      display: flex;
+      width: auto;
+      height: 44px;
+      align-items: center;
+      font-size: 16px;
+      text-decoration: none;
+      background: #FFF544;
+      color: #000;
+      text-align: center;
+      position: relative;
+      transition: all .35s;
+      padding: 0 24px;
+      justify-content: center;
+  }
+  .cus_button a span{
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      height: 100%;
+      font-family: "Jost", sans-serif;
+      font-size: 16px;
+  }
+  .cus_button a:after{
+      position: absolute;
+      content: "";
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: #000;
+      color: #fff;
+      transition: all .35s;
+  }
+  .cus_button a:hover span{
+      color: #fff;
+  }
+  .cus_button a:hover:after{
+      width: 100%;
+  }
+  .btn_arrow{
+      width: 24px;
+      animation: auto;
+      margin-left: 15px;
+  }
+  .image_with_text_button .btn_arrow{
+      margin-left: 20px !important;
+  }
+  .banner_image{
+      height: 390px;
+      max-width: 1440px;
+      margin: 0 auto;
+  }
+  .b_button a:hover .btn_arrow_black{
+      display: none;
+  }
+  .b_button .btn_arrow_white {
+      display: none;
+  }
+  .b_button a:hover .btn_arrow_white {
+      display: block !important;
+  }
+  .image_with_text_button{
+      width: 220px;
+  }
+  .image_with_text_button a .btn_arrow_black{
+      display: none;
+  }
+  .image_with_text_button a:hover .btn_arrow_black{
+      display: block !important;
+  }
+  .image_with_text_button .btn_arrow_white {
+      display: block;
+  }
+  .image_with_text_button a:hover .btn_arrow_white {
+      display: none !important;
+  }
+  .image_with_text_button a{
+      background: #000;
+      color: #fff;
+  }
+  .image_with_text_button a:after{
+      position: absolute;
+      content: "";
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: #FFF544;
+      color: #000;
+      transition: all .35s;
+  }
+  .image_with_text_button a:hover span{
+      color: #000 !important;
+  }
+  .header_mb_icon{
+      display: none;
+  }
+  .mb_menu{
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 0;
+      gap: 10px;
+      position: absolute;
+      width: 100%;
+      top: -200px;
+      background: #F2F2F2;
+      transition: all .35s;
+  }
+  .mb_menu{
+      display: none;
+  }
+  .image-with-text-img .image_with_text_button{
+      display: none;
+  }
+  .bootomText{
+      margin: 0;
+      height: 34px;
+      background: #F5F5F5;
+      line-height: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+  }
+  
+  /* For mobile */
+  @media only screen and (max-width: 757px){
+    .banner_announcement{
+      justify-content: space-between;
+    }  
+    .mb_menu .b_button{
+      width: 244px !important;
+    }
+    .mb_menu .b_button a span{
+      justify-content: center;
+    }
+    .b_button {
+      width: auto !important;
+    }
+    .b_button a{
+      display: none;
+    }    
+    .announcement_text{
+      display: none;
+    }  
+    .header_mb_icon{
+      display: block;
+  }
+    .header_mb_icon .cus_close{
+      display: none;
+    }
+    .menu_active .cus_close{
+      display: block !important;
+    }
+    .menu_active .cus_humb{
+      display: none;
+    }
+    .header_mb_icon .icon{
+      display: flex;
+      opacity: 1;
+      transform: scale(1);
+      transition: transform .15s ease, opacity .15s ease;
+      height: 2rem;
+      width: 2rem;
+      fill: none;
+      vertical-align: middle;
+    }
+    .mb_menu{
+      display: flex !important;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 0;
+      gap: 10px;
+      position: absolute;
+      width: 100%;
+      top: -200px;
+      background: #F2F2F2;
+      transition: all .35s;
+  }
+    .menu_active .mb_menu{
+      top: 60px; !important;
+  }
+    .mb_menu .announcement_text {
+      display: block !important;
+      font-size: 16px;
+      color: #000;
+      font-family: "Jost", sans-serif;
+    }
+    .mb_menu .b_button a {
+      display: block !important;
+    }
+    .image-with-text {
+      flex-direction: column;
+   }
+    .image-with-text-textBox{
+      text-align: center;
+      padding: 0 30px;
+    }
+    .image-with-text-textBox .image_with_text_button{
+      display: none;
+    }
+    .banner_image{
+      display: none;
+    }
+    .image-with-text-textBox h2 {
+      font-size: 30px !important;
+  }
+    .image-with-text-textBox p {
+      font-size: 16px !important;
+      line-height: 24px !important;
+      padding-bottom: 20px;
+  }
+    .image-with-text-img{
+      position: relative;
+    }
+    .image-with-text-img .image_with_text_button{
+      display: block !important;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      right: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .image-with-text {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+  }
+    .bootomText {
+      font-size: 12px;
+      margin-top: 20px;
+  }
+  }
+
+  /* For tablet */
+  @media (min-width: 768px) and (max-width: 1149px){
+    .image-with-text-textBox h2 {
+      font-size: 40px !important;
+      margin: 0 !important;
+  }
+    .image-with-text-textBox p {
+      font-size: 16px !important;
+  }
+  }
+
+</style>
+<div class="cus_banner" id="headerIcon">
+  {% comment %} announcement bar {% endcomment %}
+  <div class="banner_announcement">
+    <div class="header_mb_icon">
+      <span class="cus_humb" id="menuOpen">{% render 'icon-hamburger' %}</span>
+      <span class="cus_close" id="menuclose">{% render 'icon-close' %}</span>
+    </div>  
+    <div class="b_logo"><img src="{{ section.settings.logo | img_url : 'master' }}"></div>
+    <div class="announcement_text"><p>{{ section.settings.ann_text }}</p></div>
+    <div class="b_button cus_button">
+      <a href="{{ section.settings.b_url }}"><span>{{ section.settings.b_button_title }} <img class="btn_arrow btn_arrow_black" src="https://cdn.shopify.com/s/files/1/0709/6339/6854/files/Line_15.png?v=1720114463"> <img class="btn_arrow btn_arrow_white" src="https://cdn.shopify.com/s/files/1/0709/6339/6854/files/Line_15_1.png?v=1720114805"></span></a>
+    </div>
+  </div>
+  <div class="mb_menu">
+    <div class="announcement_text">{{ section.settings.ann_text }}</div>
+    <div class="b_button cus_button">
+      <a href="{{ section.settings.b_url }}"><span>{{ section.settings.b_button_title }} <img class="btn_arrow btn_arrow_black" src="https://cdn.shopify.com/s/files/1/0709/6339/6854/files/Line_15.png?v=1720114463"> <img class="btn_arrow btn_arrow_white" src="https://cdn.shopify.com/s/files/1/0709/6339/6854/files/Line_15_1.png?v=1720114805"></span></a>
+    </div>
+  </div>  
+
+  {% comment %} Banner section {% endcomment %}
+  <div class="banner_image">
+    <img src="{{ section.settings.b_image | img_url : 'master' }}">
+  </div>
+  <div class="image-with-text">
+    <div class="image-with-text-textBox">
+      <h2>{{ section.settings.img_text_title }}</h2>
+      <p>{{ section.settings.img_text_subtext }}</p>
+      <div class="image_with_text_button cus_button">
+        <a href="{{ section.settings.img_text_btn_url }}"><span>{{ section.settings.img_text_btn }} <img class="btn_arrow btn_arrow_black" src="https://cdn.shopify.com/s/files/1/0709/6339/6854/files/Line_15.png?v=1720114463"> <img class="btn_arrow btn_arrow_white" src="https://cdn.shopify.com/s/files/1/0709/6339/6854/files/Line_15_1.png?v=1720114805"></span></a>
+      </div> 
+    </div>
+    <div class="image-with-text-img">
+      <img src="{{ section.settings.banner_text_image | img_url : 'master' }}">
+      <div class="image_with_text_button cus_button">
+        <a href="{{ section.settings.img_text_btn_url }}"><span>{{ section.settings.img_text_btn }} <img class="btn_arrow btn_arrow_black" src="https://cdn.shopify.com/s/files/1/0709/6339/6854/files/Line_15.png?v=1720114463"> <img class="btn_arrow btn_arrow_white" src="https://cdn.shopify.com/s/files/1/0709/6339/6854/files/Line_15_1.png?v=1720114805"></span></a>
+      </div> 
+    </div> 
+    </div>
+    <p class="bootomText">{{ section.settings.bottomText }}</p>
+  </div>
+</div>
+
+<script>
+  const menuOpen = document.getElementById('menuOpen');
+  const menuClose = document.getElementById('menuclose');
+  const headerIcon = document.getElementById('headerIcon');
+  
+  menuOpen.addEventListener('click', function() {
+    headerIcon.classList.add('menu_active');
+  });
+  
+  menuClose.addEventListener('click', function() {
+    headerIcon.classList.remove('menu_active');
+  });
+
+</script>
+{% schema %}
+{
+  "name": "Banner v2",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Announcement Bar"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Add logo"
+    },
+    {
+      "type": "text",
+      "id": "ann_text",
+      "label": "Announcement text",
+      "default": "Find the ideal gift for your loved ones."
+    },
+    {
+      "type": "text",
+      "id": "b_button_title",
+      "label": "Button Title",
+      "default": "CHOOSE GIFT"
+    },
+    {
+      "type": "url",
+      "id": "b_url",
+      "label": "Button link/Url"
+    },
+    {
+      "type": "header",
+      "content": "Banner section"
+    },
+    {
+      "type": "image_picker",
+      "id": "b_image",
+      "label": "Banner image"
+    },
+    {
+      "type": "text",
+      "id": "img_text_title",
+      "label": "Banner Title",
+      "default": "The Gift Guide"
+    },
+    {
+      "type": "text",
+      "id": "img_text_subtext",
+      "label": "Banner subtext",
+      "default": "Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season."
+    },
+    {
+      "type": "text",
+      "id": "img_text_btn",
+      "label": "Button Title",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "img_text_btn_url",
+      "label": "Button link/Url"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_text_image",
+      "label": "Banner text image"
+    },
+    {
+      "type": "text",
+      "id": "bottomText",
+      "label": "Bottom line text",
+      "default": "SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL"
+    }
+
+  ],
+  "presets": [
+    {
+      "name": "Banner v2"
+    }
+  ]
+}
+{% endschema %}
