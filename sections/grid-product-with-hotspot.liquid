@@ -1,0 +1,499 @@
+<style>
+  div{
+    font-family: "Jost", sans-serif;
+    font-weight: 400;
+  }
+  .product-hotspot-section{
+    padding-left: 5rem;
+    padding-right: 5rem;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding-top: 50px;
+  }
+  .product-hotspot-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 10px;
+    row-gap: 0;
+  }
+  .product-hotspot-item{
+    position: relative;
+  }
+  .product-hotspot-image{
+    max-width: 100%;
+    height: 444px;
+    object-fit: cover;
+  }
+  .product-hotspot-icon{
+    transform: translate(0px, -1px);
+  }
+  
+  .product-hotspot-point{
+    position: absolute;
+    top: 10%;
+    right: 40%;
+    background: #fff;
+    color: #000;
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
+  }
+  .product-popup{
+    display: none;
+    position: fixed;
+    left: 50%;
+    right: 50%;
+    width: 311px;
+    height: 447px;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 40px 20px 20px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    z-index: 9999;
+  }
+  .product-popup-content{
+    position: relative;
+  }
+  .product-popup-close{
+    position: absolute;
+    top: -40px;
+    right: 4px;
+    cursor: pointer;
+    font-size: 30px;
+    color: #000;
+  }
+  .pp_top{
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  #popup-product-form{
+    display: flex;
+    flex-direction: column;
+  }
+  #popup-product-title{
+    margin: 8px 0 0;
+    font-size: 16px;
+  }
+  #popup-product-price{
+    font-size: 16px;
+    color: #000;
+    margin: 4px 0;
+  }
+  #popup-product-desc{
+    font-size: 12px;
+    line-height: 13px;
+  }
+  #popup-product-variants{
+    padding: 14px;
+    margin-bottom: 20px;
+  }
+
+  .ATC_button button{
+    display: flex;
+    width: 100%;
+    height: 44px;
+    align-items: center;
+    font-size: 16px;
+    text-decoration: none;
+    background: #000;
+    color: #fff;
+    text-align: center;
+    position: relative;
+    transition: all .35s;
+    padding: 0 24px;
+    justify-content: center;
+    cursor: pointer;
+  }
+  .ATC_button button span{
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 30px;
+  }
+  .ATC_button button:after{
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: #FFF544;
+    color: #000;
+    transition: all .35s;
+  }
+  .ATC_button button:hover{
+    color: #000;
+    border: unset !important;
+  }
+  .ATC_button button:hover:after{
+    width: 100%;
+  }
+  .btn_arrow{
+    width: 24px;
+    animation: auto;
+    margin-left: 10px;
+  }
+  .ATC_button button .btn_arrow_black{
+    display: none;
+  }
+  .ATC_button button:hover .btn_arrow_black{
+    display: block !important;
+  }
+  .ATC_button button:hover .btn_arrow_white {
+    display: none !important;
+  }
+  .pp_top_left img{
+    width: 120px;
+    height: 140px;
+    object-fit: cover;
+  }
+  .product-hotspot-section_title{
+    font-size: 36px;
+    font-weight: 400;
+  }
+  .color-pills {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+    height: 40px;
+}
+
+  .color-pill {
+    padding: 4px 20px;
+    border: 1px solid #000;
+    width: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  .color-pill.active {
+    background-color: #000;
+    color: #fff;
+  }
+  .variant_title{
+    font-size: 14px;
+    color: #000;
+    margin-bottom: 4px;
+  }
+  #popup-product-sizes{
+    height: 40px;
+    margin-bottom: 20px;
+  }
+  .color-pill:before{
+    content: "";
+    position: absolute;
+    height: 40px;
+    width: 5px;
+    left: 0;
+    border: 1px solid #000;
+  }
+  .color-pill.black:before{
+    background-color: #000;
+  }
+  .color-pill.white:before{
+    background-color: #fff;
+  }
+  @media only screen and (max-width: 757px){
+    .product-hotspot-container {
+      grid-template-columns: 1fr 1fr !important;
+     }
+    .product-hotspot-section {
+      padding-left: 25px !important;
+      padding-right: 25px !important;
+     }
+    .product-hotspot-section_title{
+      font-size: 26px !important;
+     }
+    .product-hotspot-image {
+      height: 187px !important;
+     }
+    .product-hotspot-point {
+      right: 28% !important;
+     }
+  }
+  @media only screen and (min-width: 991px){
+  #product-hotspot-section > div.product-hotspot-container > div:nth-child(1) > div{
+    transform: translate(20px, 200px);
+  }
+  #product-hotspot-section > div.product-hotspot-container > div:nth-child(2) > div{
+    transform: translate(115px, 174px);
+  }
+  #product-hotspot-section > div.product-hotspot-container > div:nth-child(3) > div{
+    transform: translate(20px, 30px);
+  }
+  #product-hotspot-section > div.product-hotspot-container > div:nth-child(4) > div{
+    transform: translate(60px, 26px);
+  }
+  #product-hotspot-section > div.product-hotspot-container > div:nth-child(5) > div{
+    transform: translate(-34px, 72px);
+  }
+  #product-hotspot-section > div.product-hotspot-container > div:nth-child(6) > div{
+    transform: translate(81px, 128px);
+  }
+  }
+</style>
+<section id="product-hotspot-section" class="product-hotspot-section">
+  <h2 class="product-hotspot-section_title">{{ section.settings.title }}</h2>
+  <div class="product-hotspot-container">
+    {% for product in section.settings.products %}
+      <div class="product-hotspot-item">
+        <img src="{{ product.featured_image | img_url: '444x444' }}" alt="{{ product.title }}" class="product-hotspot-image">
+        <div class="product-hotspot-point" data-product-handle="{{ product.handle }}" data-product-variants='{{ product.variants | json }}' data-product-options='{{ product.options | json }}'>
+          <span class="product-hotspot-icon">+</span>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="product-popup" id="product-popup">
+    <div class="product-popup-content">
+      <span class="product-popup-close">&times;</span>
+      <div class="pp_top">
+        <div class="pp_top_left">
+          <img id="popup-product-image" src="" alt="">
+        </div>
+        <div class="pp_top_right">
+          <h2 id="popup-product-title"></h2>
+          <p id="popup-product-price"></p>
+          <div id="popup-product-desc"></div>
+        </div>
+      </div>
+      <form id="popup-product-form" action="/cart/add" method="post">
+        <span class="variant_title">Color <br></span>
+        <div id="popup-product-colors" class="color-pills {{ variant.title }}"></div>
+        <span class="variant_title">Size <br></span>
+        <select id="popup-product-sizes" name="size"></select>
+        <input type="hidden" id="popup-variant-id" name="id">
+        <div class="ATC_button cus_button">
+          <button id="" class="atcBtn" type="submit"><span>ADD TO CART <img class="btn_arrow btn_arrow_black" src="https://cdn.shopify.com/s/files/1/0709/6339/6854/files/Line_15.png?v=1720114463"> <img class="btn_arrow btn_arrow_white" src="https://cdn.shopify.com/s/files/1/0709/6339/6854/files/Line_15_1.png?v=1720114805"></span></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var hotspotPoints = document.querySelectorAll('.product-hotspot-point');
+  var popup = document.getElementById('product-popup');
+  var closeBtn = document.querySelector('.product-popup-close');
+  var atcBtn = document.querySelector('.atcBtn');
+  var colorsContainer = document.getElementById('popup-product-colors');
+  var sizesDropdown = document.getElementById('popup-product-sizes');
+  var variantIdInput = document.getElementById('popup-variant-id');
+  var selectedColor = null;
+  var selectedSize = null;
+
+  hotspotPoints.forEach(function(point) {
+    point.addEventListener('click', function() {
+      var productHandle = this.dataset.productHandle;
+      var productVariants = JSON.parse(this.dataset.productVariants);
+      var productOptions = JSON.parse(this.dataset.productOptions);
+
+      // Get the index of the color and size options
+      var colorOptionIndex = productOptions.indexOf("Color");
+      var sizeOptionIndex = productOptions.indexOf("Size");
+
+      if (colorOptionIndex !== -1) {
+        colorsContainer.innerHTML = '';
+        var uniqueColors = new Set();
+        var colorVariantMap = {};
+
+        productVariants.forEach(variant => {
+          var color = variant[`option${colorOptionIndex + 1}`];
+          if (color) {
+            uniqueColors.add(color);
+            if (!colorVariantMap[color]) {
+              colorVariantMap[color] = variant.id;
+            }
+          }
+        });
+
+        uniqueColors.forEach(color => {
+          var pill = document.createElement('div');
+          pill.className = 'color-pill ' + color.toLowerCase().replace(/\s+/g, '-'); // Add color as class
+          pill.innerText = color;
+          pill.dataset.variantId = colorVariantMap[color];
+          pill.addEventListener('click', function() {
+            document.querySelectorAll('.color-pill').forEach(pill => pill.classList.remove('active'));
+            this.classList.add('active');
+            selectedColor = this.innerText;
+            updateVariantId();
+          });
+          colorsContainer.appendChild(pill);
+        });
+
+        // Select the first color by default
+        var firstColorPill = colorsContainer.querySelector('.color-pill');
+        if (firstColorPill) {
+          firstColorPill.click();
+        }
+      } else {
+        colorsContainer.style.display = 'none';
+      }
+
+      if (sizeOptionIndex !== -1) {
+        sizesDropdown.innerHTML = '';
+        var uniqueSizes = new Set();
+        var sizeVariantMap = {};
+
+        productVariants.forEach(variant => {
+          var size = variant[`option${sizeOptionIndex + 1}`];
+          if (size) {
+            uniqueSizes.add(size);
+            if (!sizeVariantMap[size]) {
+              sizeVariantMap[size] = variant.id;
+            }
+          }
+        });
+
+        uniqueSizes.forEach(size => {
+          var option = document.createElement('option');
+          option.value = sizeVariantMap[size];
+          option.text = size;
+          sizesDropdown.appendChild(option);
+        });
+
+        sizesDropdown.addEventListener('change', function() {
+          selectedSize = this.options[this.selectedIndex].text;
+          updateVariantId();
+        });
+
+        // Select the first size by default
+        var firstSizeOption = sizesDropdown.querySelector('option');
+        if (firstSizeOption) {
+          sizesDropdown.value = firstSizeOption.value;
+          sizesDropdown.dispatchEvent(new Event('change'));
+        }
+      } else {
+        sizesDropdown.style.display = 'none';
+      }
+
+      // Fetch the rest of the product details
+      fetch('/products/' + productHandle + '.js')
+        .then(response => response.json())
+        .then(product => {
+          document.getElementById('popup-product-image').src = product.images[0];
+          atcBtn.dataset.handle = product.handle;
+          document.getElementById('popup-product-title').innerText = product.title;
+          document.getElementById('popup-product-price').innerText = '$' + (product.price / 100).toFixed(2);
+          document.getElementById('popup-product-desc').innerText = product.description.replace(/(<([^>]+)>)/gi, "");
+
+          popup.style.display = 'block';
+        });
+
+      // Set variant ID based on selected color and size
+      function updateVariantId() {
+        productVariants.forEach(variant => {
+          if ((colorOptionIndex === -1 || variant[`option${colorOptionIndex + 1}`] === selectedColor) && 
+              (sizeOptionIndex === -1 || variant[`option${sizeOptionIndex + 1}`] === selectedSize)) {
+            variantIdInput.value = variant.id;
+          }
+        });
+      }
+
+      // Initialize variant ID
+      updateVariantId();
+    });
+  });
+
+  closeBtn.addEventListener('click', function() {
+    popup.style.display = 'none';
+  });
+
+  window.onclick = function(event) {
+    if (event.target == popup) {
+      popup.style.display = 'none';
+    }
+  };
+
+  atcBtn.addEventListener('click', function() {
+    var variantId = variantIdInput.value;
+    addToCart(variantId, function() {
+      if (selectedColor === 'Black' && selectedSize === 'M') {
+        addToCart(46960161325302, updateCartDrawer); // Soft Winter Jacket variant ID
+      } else {
+        updateCartDrawer();
+      }
+    });
+  });
+
+  function addToCart(variantId, callback) {
+    var xhr = new XMLHttpRequest();
+    var url = "/cart/add.js";
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        if (callback) callback();
+      }
+    };
+    var data = JSON.stringify({ "quantity": 1, "id": variantId });
+    xhr.send(data);
+  }
+
+  function updateCartDrawer() {
+    // Open cart drawer and refresh contents
+    document.getElementById('cart-icon-bubble').click();
+    document.querySelector('cart-drawer').classList.remove('is-empty');
+    document.querySelector('.drawer__inner-empty').style.display = 'none';
+
+    fetch(location.href, { method: 'GET' })
+      .then(response => response.text())
+      .then(html => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+
+        // Replace cart drawer content
+        document.querySelector('cart-drawer').innerHTML = doc.querySelector('#cartDrawer').innerHTML;
+        document.getElementById('cart-icon-bubble').innerHTML = doc.querySelector('#cart-icon-bubble').innerHTML;
+      })
+      .catch(e => {
+        console.error(e);
+      });
+  }
+});
+
+</script>
+{% schema %}
+{
+  "name": "Product grid with hotspot",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Tisso vison in the wild"
+    },
+    {
+      "type": "product_list",
+      "id": "products",
+      "label": "Products"
+    }
+
+  ],
+  "presets": [
+    {
+      "name": "Product grid with hotspot"
+    }
+  ]
+}
+{% endschema %}
